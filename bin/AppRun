@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Change to the directory where the binary is located
+cd "$(dirname "$(readlink -f "${0}")")" || exit
+
+# Execute the binary
+./usr/bin/linux64
+

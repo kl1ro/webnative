@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=MyApp
+Exec=usr/bin/linux64
+Icon=icon
+Type=Application
+Categories=Utility;
