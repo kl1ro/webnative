@@ -8,8 +8,8 @@
 int backPipe[2], forthPipe[2];
 WebKitWebView *web_view;
 
-gboolean sendSignal(char *script) {
-	webkit_web_view_run_javascript(web_view, script, NULL, NULL, NULL);
+gboolean sendSignal(const char *script) {
+	webkit_web_view_evaluate_javascript(web_view, script, 0, NULL, NULL, NULL, NULL, NULL);
 	return G_SOURCE_REMOVE;
 }
 
@@ -21,7 +21,8 @@ static void getSignal(WebKitUserContentManager *manager, WebKitJavascriptResult 
 		write(forthPipe[1], str_value, strlen(str_value));
 		read(backPipe[0], message, 10485760);
 		if(std::string(message) != "Backend\n") exit(1);
-		sendSignal("window.receiveSignalFromCpp('Backend');");
+		std::string script = "window.receiveSignalFromCpp('Backend');";
+		sendSignal(script.c_str());
 		g_free(str_value);
 	}
 }
@@ -50,7 +51,7 @@ int main(int argc, char **argv) {
 
 	// Here the parent process continues
 	if(pid) {
-		GtkApplication *app = gtk_application_new("com.example.WebKitGTK", G_APPLICATION_FLAGS_NONE);
+		GtkApplication *app = gtk_application_new("com.example.WebKitGTK", G_APPLICATION_DEFAULT_FLAGS);
 		g_signal_connect(app, "activate", G_CALLBACK(activate), NULL);
 		int status = g_application_run(G_APPLICATION(app), argc, argv);
 		g_object_unref(app);
