@@ -1,3 +1,4 @@
+Version (0.01)
 Framework for creating desktop (if you want to write mobile apps, I think Cordova is a good option)
 applications on top of native webview component and nodejs backend
 
