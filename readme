@@ -14,5 +14,5 @@ Then u can import them in the app/api/backend.mjs file. Ensure that u have app/a
 How to use js frameworks? - U need to install them (now in the project root folder):
 npm init -y
 --then install the packages you need--
-Then u can compile the code into public/index.js with for example babel and webpack
+Then u can compile the code into app/public/index.js with for example babel and webpack
 and connect it to the index.html
