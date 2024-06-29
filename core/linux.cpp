@@ -59,7 +59,7 @@ int main(int argc, char **argv) {
 	}
 
 	// Start the nodejs child process
-	execlp("node", "node", "usr/bin/backend.js", std::to_string(forthPipe[0]).c_str(), std::to_string(backPipe[1]).c_str(), nullptr);
+	execlp("node", "node", "usr/bin/backend.mjs", std::to_string(forthPipe[0]).c_str(), std::to_string(backPipe[1]).c_str(), nullptr);
 
 	return 0;
 }

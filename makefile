@@ -4,8 +4,8 @@ linkerFlags = `pkg-config --libs gtk+-3.0 webkit2gtk-4.0`
 builderTarget = appimagetool-x86_64.AppImage
 coreSource = core/linux.cpp
 coreTarget = bin/usr/bin/linux64
-backendTarget = bin/usr/bin/backend.js
-backendSource = app/backend.js
+backendTarget = bin/usr/bin/backend.mjs
+backendSource = app/api/backend.mjs
 publicSource = app/public
 publicTarget = bin/usr/bin/public
 distTarget = dist/linux64
@@ -18,8 +18,8 @@ all: $(builderTarget) $(coreTarget) $(backendTarget) $(publicTarget) $(distTarge
 $(builderTarget):
 	mkdir ${toolsFolder} -p
 	if [ ! -f ${appimagetoolTarget} ]; then \
-	    wget -O ${appimagetoolTarget} https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage; \
-	    chmod +x ${appimagetoolTarget}; \
+		wget -O ${appimagetoolTarget} https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage; \
+		chmod +x ${appimagetoolTarget}; \
 	fi
 
 # Compile the coreSource
@@ -31,7 +31,10 @@ $(coreTarget): $(coreSource)
 	$(compiler) $(coreSource) $(compilerFlags) -o $(coreTarget) $(linkerFlags)
 
 $(backendTarget): $(backendSource)
-	cp $(backendSource) $(backendTarget)
+	cp $(backendSource) $(backendTarget) -r
+	if [ -d app/api/node_modules ]; then \
+		cp app/api/node_modules bin/usr/bin -r; \
+	fi
 
 # Copy the compiled public folder
 $(publicTarget): $(publicSource)
@@ -42,7 +45,7 @@ $(distTarget): $(builderTarget) $(coreTarget) $(backendTarget) $(backendTarget)
 	mkdir dist -p
 	rm dist/linux64 -rf
 	./${appimagetoolTarget} bin/ -n dist/linux64
-	rm bin -r
+	rm bin -rf
 
 clean:
 	rm bin dist -rf
