@@ -4,8 +4,8 @@ linkerFlags = `pkg-config --libs gtk+-3.0 webkit2gtk-4.0`
 builderTarget = appimagetool-x86_64.AppImage
 coreSource = core/linux.cpp
 coreTarget = bin/usr/bin/linux64
-backendTarget = bin/usr/bin/backend.mjs
-backendSource = app/api/backend.mjs
+backendTarget = bin/usr/bin/api
+backendSource = app/api
 publicSource = app/public
 publicTarget = bin/usr/bin/public
 distTarget = dist/linux64
@@ -32,9 +32,6 @@ $(coreTarget): $(coreSource)
 
 $(backendTarget): $(backendSource)
 	cp $(backendSource) $(backendTarget) -r
-	if [ -d app/api/node_modules ]; then \
-		cp app/api/node_modules bin/usr/bin -r; \
-	fi
 
 # Copy the compiled public folder
 $(publicTarget): $(publicSource)
