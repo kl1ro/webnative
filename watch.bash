@@ -1,6 +1,8 @@
+# This script is for app automatic restart on every code change
 start_app() {
-	webpack --config webpack.common.js
-	npx tailwindcss -i ./app/globals.css -o ./app/public/styles.css
+	# Uncomment if you use those (I do cause I enjoy using react)
+	# webpack --config webpack.common.js
+	# npx tailwindcss -i ./app/globals.css -o ./app/public/styles.css
 	make
 	./dist/linux64 & MAIN_PID=$!
   sleep 2
