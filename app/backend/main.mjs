@@ -10,7 +10,7 @@ pipe[0].on("data", async message => {
 			else chunk++
 			return
 		}
-		let {path, body, reqId} = JSON.parse(message)
+		var {path, body, reqId} = JSON.parse(message)
 		if(path[0] == "/") path = "./" + path.slice(1) + ".mjs"
 		else {pipe[1].write(JSON.stringify({reqId, error: "Route not found"})); return}
 		buffer = Buffer.from(JSON.stringify({reqId, ...await import(path).then(m => m.default(body))}), "utf-8")
