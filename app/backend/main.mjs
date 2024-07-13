@@ -18,8 +18,7 @@ pipe[0].on("data", async message => {
 		pipe[1].write(buffer)
 	}
 	catch(e) {
-		if(e.name == "PrismaClientInitializationError") pipe[1].write(JSON.stringify({reqId, error: "You need to start the postgres service"}))
-		else if(e instanceof ApiError) pipe[1].write(JSON.stringify({reqId, error: e.message}))
+		if(e instanceof ApiError) pipe[1].write(JSON.stringify({reqId, error: e.message}))
 		else pipe[1].write(JSON.stringify({reqId, error: "Route not found"}))
 	}
 })
