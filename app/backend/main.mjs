@@ -19,6 +19,6 @@ pipe[0].on("data", async message => {
 	}
 	catch(e) {
 		if(e instanceof ApiError) pipe[1].write(JSON.stringify({reqId, error: e.message}))
-		else pipe[1].write(JSON.stringify({reqId, error: "Route not found"}))
+		else pipe[1].write(JSON.stringify({reqId, error: "Something went wrong..."}))
 	}
 })
