@@ -1,26 +1,36 @@
 compiler = g++
 compilerFlags = -std=c++11 -Wall `pkg-config --cflags gtk+-3.0 webkit2gtk-4.0`
 linkerFlags = `pkg-config --libs gtk+-3.0 webkit2gtk-4.0`
-builderTarget = appimagetool-x86_64.AppImage
+
 coreSource = core/linux.cpp
 coreTarget = bin/usr/bin/linux64
+
 backendTarget = bin/usr/bin/backend
 backendSource = app/backend
+
 publicSource = app/public
 publicTarget = bin/usr/bin/public
-distTarget = dist/linux64
+
+linuxTarget = dist/linux64
+windowsTarget = dist/windows64
+
 appimagetoolTarget = core/tools/appimagetool
+webview2Target = core/tools/webview2
 toolsFolder = core/tools
 
 # Default coreTarget
-all: $(builderTarget) $(coreTarget) $(backendTarget) $(publicTarget) $(distTarget)
+all: $(appimagetoolTarget) $(webview2) $(coreTarget) $(backendTarget) $(publicTarget) $(distTarget)
 
-$(builderTarget):
+$(appimagetoolTarget):
 	mkdir ${toolsFolder} -p
 	if [ ! -f ${appimagetoolTarget} ]; then \
 		wget -O ${appimagetoolTarget} https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage; \
 		chmod +x ${appimagetoolTarget}; \
 	fi
+
+$(webview2Target):
+	nuget install Microsoft.Web.WebView2 -Version 1.0.1370.28 -OutputDirectory $(toolsFolder)
+	mv $(toolsFolder)/Microsoft.Web.WebView2.1.0.1370.28 $(webview2Target)
 
 # Compile the coreSource
 $(coreTarget): $(coreSource)
