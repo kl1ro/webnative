@@ -1,57 +1,37 @@
 {
-  "name": "@mindw1n/webnative",
-  "type": "module",
-  "version": "3.3.1",
-  "scripts": {
-    "build": "esbuild src/index.ts --bundle --platform=node --format=esm --target=es2020 --outfile=index.js --banner:js=\"#!/usr/bin/env node\" --minify"
-  },
-  "bin": {
-    "webnative": "index.js"
-  },
-  "files": [
-    "LICENSE",
-    "index.js",
-    "prebuilds/dist",
-    "docs",
-    "template",
-    "readme.md"
-  ],
-  "keywords": [
-    "desktop",
-    "webview",
-    "cross-platform",
-    "android",
-    "linux",
-    "windows",
-    "framework",
-    "native"
-  ],
-  "author": "mindw1n",
-  "license": "MIT",
-  "description": "Build desktop and mobile apps with web technologies — powered by native WebView components and Node.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/kl1ro/webnative.git"
-  },
-  "homepage": "https://github.com/kl1ro/webnative#readme",
-  "bugs": {
-    "url": "https://github.com/kl1ro/webnative/issues"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.39.2",
-    "@types/getos": "^3.0.4",
-    "@types/node": "^25.9.1",
-    "@types/package-json": "^5.0.0",
-    "@typescript-eslint/eslint-plugin": "^8.54.0",
-    "@typescript-eslint/parser": "^8.54.0",
-    "esbuild": "^0.27.2",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-prettier": "^5.5.5",
-    "globals": "^17.2.0",
-    "typescript-eslint": "^8.54.0"
-  },
-  "dependencies": {
-    "commander": "^15.0.0",
-    "jszip": "^3.10.1"
-  }
+	"type": "module",
+	"name": "@mindw1n/webnative-core",
+	"version": "2.0.0",
+	"description": "",
+	"scripts": {
+		"build": "tsc"
+	},
+	"exports": {
+		"./linux": {
+			"import": "./dist/linux/index.js",
+			"types": "./dist/linux/index.d.ts"
+		},
+		"./linux/api/authenticate": {
+			"import": "./dist/linux/api/authenticate.js",
+			"types": "./dist/linux/api/authenticate.d.ts"
+		},
+		"./windows": {
+			"import": "./dist/windows/index.js",
+			"types": "./dist/windows/index.d.ts"
+		},
+		"./windows/api/authenticate": {
+			"import": "./dist/windows/api/authenticate.js",
+			"types": "./dist/windows/api/authenticate.d.ts"
+		}
+	},
+	"files": [
+		"LICENSE",
+		"dist"
+	],
+	"keywords": [],
+	"author": "",
+	"license": "MIT",
+	"dependencies": {
+		"@mindw1n/webnative-core": "^1.0.2"
+	}
 }

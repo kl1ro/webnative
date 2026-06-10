@@ -1,0 +1,72 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0f0f13;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #a78bfa;
+  border: 1px solid #3d2f6e;
+  border-radius: 99px;
+  padding: 4px 14px;
+  margin-bottom: 24px;
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+h1 span {
+  color: #7c6fff;
+}
+
+p {
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  color: #8b8b9e;
+  max-width: 400px;
+  line-height: 1.6;
+}
+
+h2 {
+  position: fixed;
+  bottom: 20px;
+  right: 24px;
+  font-size: 20px;
+  font-weight: 400;
+  color: #707089;
+}
+
+span {
+  color: #7c6fff;
+}
+
+.backend-status {
+  position: fixed;
+  bottom: 20px;
+  left: 24px;
+  font-size: 20px;
+  font-weight: 400;
+  color: #707089;
+}
