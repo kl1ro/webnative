@@ -1,7 +1,6 @@
 dist
 node_modules
-prebuilds/*
-!prebuilds/dist
+prebuilds
 /index.js
 src/core/windows/packages
 src/core/windows/.vs
